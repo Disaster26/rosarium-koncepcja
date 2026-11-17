@@ -32,7 +32,7 @@ if(f){var st=f.querySelector('.f-status'),t0=Date.now();f.querySelector('[name=t
 f.addEventListener('submit',function(e){e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}
 if(f.dataset.demo){st.className='f-status ok';st.textContent='To podgląd strony - na docelowej stronie wiadomość trafi do fundacji.';return;}
 var btn=f.querySelector('button[type=submit]');btn.disabled=true;st.className='f-status';st.textContent='Wysyłanie...';
-fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+fetch(f.getAttribute('action'),{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
 if(j.ok){f.reset();st.className='f-status ok';st.textContent='Dziękujemy, wiadomość została wysłana. Odpowiemy najszybciej, jak to możliwe.';}
 else{st.className='f-status err';st.textContent=j.msg||'Nie udało się wysłać. Prosimy zadzwonić lub napisać e-mail.';}
 btn.disabled=false;}).catch(function(){st.className='f-status err';st.textContent='Nie udało się wysłać. Prosimy zadzwonić lub napisać e-mail.';btn.disabled=false;});});}
